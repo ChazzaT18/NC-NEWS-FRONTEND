@@ -1,15 +1,25 @@
-import getArticles from "../api";
+import { getArticles } from "../api";
 import ArticlesCard from "./ArticlesCard";
 import { useEffect, useState } from "react";
 
 const Articles = () => {
   const [articlesData, setArticlesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getArticles().then((articles) => {
-      setArticlesData(articles);
-    });
+    getArticles()
+      .then((articles) => {
+        console.log(articles);
+        setArticlesData(articles);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) {
+    return <div>Loading articles...</div>;
+  }
 
   return (
     <>
