@@ -1,4 +1,4 @@
-<img width="431" alt="image" src="https://github.com/ChazzaT18/fe-nc-news/assets/136791563/09b4d357-2d50-48cf-af58-ebc2299c9cd6">
+<img width="445" alt="Screenshot 2024-02-05 122727" src="https://github.com/ChazzaT18/fe-nc-news/assets/136791563/44eccae4-5d72-484b-bf5e-8634c93a8290">
 
 
 
