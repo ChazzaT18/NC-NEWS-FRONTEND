@@ -4,6 +4,7 @@ import { getArticleById } from "../api";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
@@ -11,13 +12,13 @@ const SingleArticle = () => {
       .then((fetchedArticle) => {
         setArticle(fetchedArticle);
       })
-      .catch((error) => {
-        console.error("Error fetching article:", error);
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [article_id]);
 
-  if (!article) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <div>Loading article...</div>;
   }
 
   return (
