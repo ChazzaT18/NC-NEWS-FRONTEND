@@ -10,6 +10,7 @@ const ArticlesCard = ({ article }) => {
           <p>Comment count: {article.comment_count}</p>
           <img className="article-card-img" src={article.article_img_url} alt={article.title} />
         </div>
+        <p className="single-article-link">Click here to read the full article</p>
       </li>
     );
   };
