@@ -1,5 +1,4 @@
-<img width="445" alt="Screenshot 2024-02-05 122727" src="https://github.com/ChazzaT18/fe-nc-news/assets/136791563/44eccae4-5d72-484b-bf5e-8634c93a8290">
-
+![image](https://github.com/ChazzaT18/fe-nc-news/assets/136791563/3b5f9049-7144-4206-8b02-dfda50239c60)
 
 
 # React + Vite
