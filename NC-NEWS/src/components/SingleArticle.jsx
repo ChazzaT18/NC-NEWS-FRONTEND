@@ -131,7 +131,14 @@ const SingleArticle = () => {
         {showComments ? "Hide Comments" : "Show Comments"}
       </button>{" "}
       <br />
-      {showComments && <CommentsList comments={comments} article_id={article_id} updateCommentCount={updateCommentCount} comment_count={article.comment_count} />}
+      {showComments && (
+        <CommentsList
+          comments={comments}
+          article_id={article_id}
+          updateCommentCount={updateCommentCount}
+          comment_count={article.comment_count}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,4 @@
 const UsersCard = ({user}) => {
-    console.log({user})
     return (
         <>
         <li className="user-card">

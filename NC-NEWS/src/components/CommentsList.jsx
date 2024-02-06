@@ -45,7 +45,7 @@ const CommentsList = ({
         <button type="submit">Submit</button>
       </form>
       {comments.map((comment) => (
-        <CommentCard key={comment.comment_id} comment={comment} />
+        <CommentCard key={comment.comment_id} comment_count={comment_count} comment={comment} updateCommentCount={updateCommentCount}/>
       ))}
     </div>
   );
