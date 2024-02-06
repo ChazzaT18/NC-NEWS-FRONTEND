@@ -9,7 +9,6 @@ const Articles = () => {
   useEffect(() => {
     getArticles()
       .then((articles) => {
-        console.log(articles);
         setArticlesData(articles);
       })
       .finally(() => {

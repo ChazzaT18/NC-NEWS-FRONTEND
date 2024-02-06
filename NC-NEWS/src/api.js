@@ -42,5 +42,26 @@ export const patchVotes = (newVote, articleId) => {
       throw error;
     });
 };
+export const getUsers = () => {
+  return axios
+    .get(`${baseUrl}/api/users`)
+    .then((response) => {
+      return response.data.users;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 
-export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes};
+// export const postCommentByArticleId = (newComment, articleId) => {
+//   return axios
+//     .post(`${baseUrl}/api/articles/${articleId}/comments`)
+//     .then((response) => {
+//       return response.data.comments;
+//     })
+//     .catch((error) => {
+//       throw error;
+//     });
+// };
+
+export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers};

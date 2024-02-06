@@ -147,6 +147,11 @@ const SingleArticle = () => {
       {showComments && (
         <div className="comments">
           <h2 id="comment-header">Comments</h2>
+          <form>
+            <label>Add a comment:</label>
+            <input type="text" name="comment" />
+            <button type="submit">Submit</button>
+          </form>
           {comments.map((comment) => (
             <CommentCard key={comment.comment_id} comment={comment} />
           ))}
