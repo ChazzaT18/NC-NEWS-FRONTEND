@@ -1,48 +1,69 @@
-#article-title{
+#article-title {
   text-decoration: underline;
   text-transform: uppercase;
   color: black;
 }
-ul {
-  padding-left: 0px;
-}
+
+ul,
 li {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 h1 {
   background-color: rgb(10, 21, 65);
   padding: 40px;
-  margin: 0px 0px;
+  margin: 0;
 }
-nav {
-  background-color: rgb(21, 31, 69);
-  margin-bottom: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+
+.nav-bar ul {
+  border: solid 1px black;
+  background-color: rgba(252, 252, 252, 0.059);
+  height: 80px;
 }
-nav button {
-  background-color: rgba(252, 252, 252, 0.858);
-  border-radius: 1;
-  border: solid 2px rgb(0, 0, 0);
-  margin: 0 10px;
-  flex: 1;
+
+.nav-bar li {
+  width: 33.33%;
+  display: inline-block;
 }
+
+.nav-link {
+  background-color: rgba(252, 252, 252, 0.059);
+  border: solid 1px black;
+  height: 50px;
+  width: 33%;
+  padding-top: 30px;
+  padding-bottom: -40px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: rgb(227, 202, 164);
+}
+
 body {
   background-color: rgb(59, 70, 121);
   letter-spacing: 1.5px;
   color: rgb(227, 202, 164);
-  max-width: 100%;
   margin: 0;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   text-align: center;
   min-width: 320px;
   min-height: 100vh;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.316),
-    1px -1px 1px rgba(0, 0, 0, 0.302), -1px 1px 1px rgba(0, 0, 0, 0.362),
-    1px 1px 1px black;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
+#comments-button,
+#upvote-button,
+#downvote-button {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 5px;
+}
+
 @media screen and (min-width: 600px) {
   .article-card {
     box-shadow: 0 0 10px rgb(0, 0, 0);
@@ -55,20 +76,21 @@ body {
     flex-direction: row;
     text-shadow: none;
     background-color: rgba(255, 255, 255, 0.808);
-    width: 90%;
+    width: 80%;
     color: rgb(0, 0, 0);
   }
+
   .article-card h3 {
-    margin-top: 0;
-    margin-bottom: auto; 
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   .article-card-img {
-    height: 250px;
-    width: 374.7px;
-    flex-direction: row;
-    margin: 0 auto 25px;
+    max-width: 60%; 
+    height: auto; 
+    margin: 0 auto; 
   }
-  .comment-card{
+
+  .comment-card {
     border: solid 2px black;
     padding: 10px;
     border-radius: 20px;
@@ -76,7 +98,8 @@ body {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   }
-  .single-article-card{
+
+  .single-article-card {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border: solid 5px (227, 202, 164);
     border-radius: 10px;
@@ -91,14 +114,24 @@ body {
     width: 90%;
     color: black;
   }
-  .article-card-bold{
+
+  .article-card-bold {
     font-weight: bold;
   }
 }
+
 @media (max-width: 600px) {
-  h2{
-    margin-bottom: 50px;
+  h2 {
+    margin: 35px 35px;
   }
+  .nav-bar ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-link {
+    width: 100%;
+  }
+}
   .article-card {
     box-shadow: 0 0 10px rgb(0, 0, 0);
     border: solid 5px (227, 202, 164);
@@ -115,34 +148,41 @@ body {
     width: 90%;
     color: rgb(0, 0, 0);
   }
+
   .article-card {
     width: 90%;
     margin: 15px auto;
     padding: 10px;
     flex-direction: column;
   }
-  .single-article-information{
+
+  .single-article-information {
     font-size: small;
     padding: 5px;
     margin-top: auto;
   }
-  .single-article-link{
+
+  .single-article-link {
     margin-bottom: 17px;
   }
+
   .article-card-img {
     height: auto;
     width: 100%;
     margin-bottom: 10px;
   }
-  .comment-card{
+
+  .comment-card {
     border: solid 2px black;
     border-radius: 20px;
     width: 90%;
     margin: 5px auto;
+    margin-bottom: 10px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   }
-  .single-article-card{
+
+  .single-article-card {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border: solid 5px (227, 202, 164);
     border-radius: 10px;
@@ -157,4 +197,15 @@ body {
     width: 90%;
     color: black;
   }
-}
+
+  .comments {
+    margin-top: -25px;
+    margin-bottom: 15px;
+  }
+
+  #comment-header {
+    margin-bottom: 45px;
+  }
+  #comments-button {
+    margin: 0 auto;
+  }
