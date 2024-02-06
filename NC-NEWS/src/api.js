@@ -53,15 +53,19 @@ export const getUsers = () => {
     });
 };
 
-// export const postCommentByArticleId = (newComment, articleId) => {
-//   return axios
-//     .post(`${baseUrl}/api/articles/${articleId}/comments`)
-//     .then((response) => {
-//       return response.data.comments;
-//     })
-//     .catch((error) => {
-//       throw error;
-//     });
-// };
+export const postCommentByArticleId = (newComment, username, article_id) => {
+  const postCommentData = {
+    body: newComment,
+    username: username,
+  };
+  return axios
+    .post(`${baseUrl}/api/articles/${article_id}/comments`, postCommentData)
+    .then((response) => {
+      return response.data.comment;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 
-export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers};
+export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers, postCommentByArticleId};

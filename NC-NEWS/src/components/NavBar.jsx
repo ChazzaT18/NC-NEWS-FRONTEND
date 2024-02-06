@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getUsers } from "../api";
 import UserLogInCard from "./UserLogInCard";
 import UserContext from "../contexts/UserContexts";
@@ -23,23 +23,19 @@ const NavBar = () => {
   return (
     <>
       <nav>
-        <ul>
-          <li className="nav-buttons">
+          <button className="nav-buttons">
             <Link to="/" className="nav-link">
               Articles
             </Link>
-          </li>
-          <li className="nav-buttons">
+          </button>
+          <button className="nav-buttons">
             <Link to="/users" className="nav-link">
               Users
             </Link>
-          </li>
-          <li className="nav-buttons">
+          </button>
             <button
-              id="nav-login-button"
-              className="nav-link"
-              onClick={toggleLoginForm}
-            >
+              className="nav-buttons"
+              onClick={toggleLoginForm}>
               {currentUser === undefined ? (
                 "Log In"
               ) : (
@@ -49,11 +45,10 @@ const NavBar = () => {
                 </>
               )}
             </button>
-          </li>
-        </ul>
       </nav>
       {showLogin && (
-        <div className="login-form">
+        <div className="floating-menu">
+          <button className="exit-button" onClick={toggleLoginForm}>Exit</button>
           <ul className="user-login">
             {usersData.map((user) => (
               <UserLogInCard key={user.username} user={user} />
@@ -66,3 +61,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
