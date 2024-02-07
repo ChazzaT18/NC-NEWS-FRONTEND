@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = 'https://chazzat18-nc-news.onrender.com'
+const baseUrl = "https://chazzat18-nc-news.onrender.com";
 
 export const getArticles = () => {
   return axios
@@ -34,7 +34,7 @@ export const getCommentsByArticleId = (articleId) => {
 };
 export const patchVotes = (newVote, articleId) => {
   return axios
-    .patch(`${baseUrl}/api/articles/${articleId}`, {inc_votes: newVote})
+    .patch(`${baseUrl}/api/articles/${articleId}`, { inc_votes: newVote })
     .then((response) => {
       return response.data.article;
     })
@@ -64,7 +64,6 @@ export const deleteCommentById = (commentId) => {
     });
 };
 
-
 export const postCommentByArticleId = (newComment, username, article_id) => {
   const postCommentData = {
     body: newComment,
@@ -80,4 +79,36 @@ export const postCommentByArticleId = (newComment, username, article_id) => {
     });
 };
 
-export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers, postCommentByArticleId, deleteCommentById};
+export const getArticlesByTopic = (slug) => {
+  return axios
+    .get(`${baseUrl}/api/articles?topic=${slug}`)
+    .then((response) => {
+      console.log(response.data.articles);
+      return response.data.articles;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const getTopics = () => {
+  return axios
+    .get(`${baseUrl}/api/topics`)
+    .then((response) => {
+      return response.data.topic;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+export default {
+  getArticleById,
+  getArticles,
+  getCommentsByArticleId,
+  patchVotes,
+  getUsers,
+  postCommentByArticleId,
+  deleteCommentById,
+  getTopics,
+  getArticlesByTopic,
+};
