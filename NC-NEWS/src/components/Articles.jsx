@@ -6,42 +6,16 @@ import ArticlesCard from "./ArticlesCard";
 const Articles = ({ topicsURL }) => {
   const [articlesData, setArticlesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedTopic, setSelectedTopic] = useState("");
 
   useEffect(() => {
-    const fetchArticles = () => {
-      setIsLoading(true);
-      return new Promise((resolve, reject) => {
-        try {
-          if (!selectedTopic) {
-            getArticles()
-              .then((articles) => {
-                setArticlesData(articles);
-                resolve();
-              })
-              .catch((error) => {
-                console.error("Error fetching articles:", error);
-                reject(error);
-              });
-          } else {
-            getArticlesByTopic(selectedTopic)
-              .then((articles) => {
-                setArticlesData(articles);
-                resolve();
-              })
-              .catch((error) => {
-                console.error("Error fetching articles by topic:", error);
-                reject(error);
-              });
-          }
-        } finally {
-          setIsLoading(false);
-        }
+    getArticles()
+      .then((articles) => {
+        setArticlesData(articles);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-    };
-
-    fetchArticles();
-  }, [selectedTopic]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading articles...</div>;
@@ -51,6 +25,11 @@ const Articles = ({ topicsURL }) => {
     <>
       <h2>Articles</h2>
       <div>
+      <Link
+            key='allArticles'
+            to='/'
+            style={{ marginRight: "10px" }}
+          ><button>All Articles</button></Link>
         {topicsURL.map((topic) => (
           <Link
             key={topic.slug}
