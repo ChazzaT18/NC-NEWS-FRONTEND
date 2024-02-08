@@ -53,6 +53,18 @@ export const getUsers = () => {
     });
 };
 
+export const deleteCommentById = (commentId) => {
+  return axios
+    .delete(`${baseUrl}/api/comments/${commentId}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
 export const postCommentByArticleId = (newComment, username, article_id) => {
   const postCommentData = {
     body: newComment,
@@ -68,4 +80,4 @@ export const postCommentByArticleId = (newComment, username, article_id) => {
     });
 };
 
-export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers, postCommentByArticleId};
+export default {getArticleById, getArticles, getCommentsByArticleId, patchVotes, getUsers, postCommentByArticleId, deleteCommentById};
