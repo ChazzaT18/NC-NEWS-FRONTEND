@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import CommentCard from "./CommentCard";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId, patchVotes } from "../api";
+import CommentsList from "./CommentsList";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -31,13 +31,10 @@ const SingleArticle = () => {
       .finally(() => {
         setCommentsIsLoading(false);
       });
-  }, []);
+  }, [comments, article_id]);
 
-  if (articleIsLoading) {
-    return <div>Loading article...</div>;
-  }
-  if (commentsIsLoading) {
-    return <div>Loading article...</div>;
+  if (articleIsLoading || commentsIsLoading) {
+    return <div>Loading...</div>;
   }
 
   const handleVote = (newVote) => {
@@ -60,52 +57,43 @@ const SingleArticle = () => {
       });
   };
 
+  const updateCommentCount = (newCount) => {
+    setArticle((prevArticle) => ({
+      ...prevArticle,
+      comment_count: newCount,
+    }));
+  };
+
   const toggleComments = () => {
     setShowComments(!showComments);
   };
 
-  const date = new Date(article.created_at);
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear();
-
   return (
     <div className="single-article-card">
-      {article && (
-        <>
-          <h2 id="single-article-title">{article.title}</h2>
-          <p className="single-article-body">{article.body}</p>
-          <br />
-          <img
-            className="article-card-img"
-            alt={article.title}
-            src={article.article_img_url}
-          />
-          <div className="single-article-information">
-            <p>
-              <span className="article-card-bold">Author: </span>
-              {article.author}
-            </p>
-            <p>
-              <span className="article-card-bold">Topic: </span>
-              {article.topic}
-            </p>
-            <p>
-              <span className="article-card-bold">Created at: </span>
-              {`${day}-${month}-${year}`}
-            </p>
-            <p>
-              <span className="article-card-bold">Votes: </span>
-              {article.votes}
-            </p>
-            <p>
-              <span className="article-card-bold">Comment count: </span>
-              {article.comment_count}
-            </p>
-            <br />
-          </div>
-        </>
-      )}
+      <h2 id="single-article-title">{article.title}</h2>
+      <p className="single-article-body">{article.body}</p>
+      <div className="single-article-information">
+        <p>
+          <span className="article-card-bold">Author: </span>
+          {article.author}
+        </p>
+        <p>
+          <span className="article-card-bold">Topic: </span>
+          {article.topic}
+        </p>
+        <p>
+          <span className="article-card-bold">Created at: </span>
+          {new Date(article.created_at).toLocaleString()}
+        </p>
+        <p>
+          <span className="article-card-bold">Votes: </span>
+          {article.votes}
+        </p>
+        <p>
+          <span className="article-card-bold">Comment count: </span>
+          {article.comment_count}
+        </p>
+      </div>
       <div className="vote-buttons">
         <button
           onClick={() => {
@@ -122,7 +110,6 @@ const SingleArticle = () => {
         >
           Upvote
         </button>
-
         <button
           onClick={() => {
             handleVote(-1);
@@ -144,14 +131,7 @@ const SingleArticle = () => {
         {showComments ? "Hide Comments" : "Show Comments"}
       </button>{" "}
       <br />
-      {showComments && (
-        <div className="comments">
-          <h2 id="comment-header">Comments</h2>
-          {comments.map((comment) => (
-            <CommentCard key={comment.comment_id} comment={comment} />
-          ))}
-        </div>
-      )}
+      {showComments && <CommentsList comments={comments} article_id={article_id} updateCommentCount={updateCommentCount} comment_count={article.comment_count} />}
     </div>
   );
 };
