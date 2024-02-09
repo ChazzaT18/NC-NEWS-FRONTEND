@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import ErrorComponent from "./ErrorComponent";
 import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId, patchVotes } from "../api";
 import CommentsList from "./CommentsList";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
+  const [error, setError] = useState(null);
   const [articleIsLoading, setArticleIsLoading] = useState(true);
   const [article, setArticle] = useState(null);
   const [commentsIsLoading, setCommentsIsLoading] = useState(true);
@@ -14,9 +16,13 @@ const SingleArticle = () => {
   const [downvoteClicked, setDownvoteClicked] = useState(false);
 
   useEffect(() => {
+    setError(null);
     getArticleById(article_id)
       .then((fetchedArticle) => {
         setArticle(fetchedArticle);
+      })
+      .catch((err) => {
+        setError(err.response.data.msg || 'An error occurred');
       })
       .finally(() => {
         setArticleIsLoading(false);
@@ -67,6 +73,10 @@ const SingleArticle = () => {
   const toggleComments = () => {
     setShowComments(!showComments);
   };
+
+  if (error) {
+    return <ErrorComponent error={error} />;
+  }
 
   return (
     <div className="single-article-card">

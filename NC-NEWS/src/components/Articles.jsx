@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { getArticles } from "../api";
+import ErrorComponent from "./ErrorComponent";
 import ArticlesCard from "./ArticlesCard";
 
 const Articles = ({ topicsURL }) => {
   const [articlesData, setArticlesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [sort_by, setSortBy] = useState(searchParams.get("sort_by") || "DESC");
@@ -17,15 +19,19 @@ const Articles = ({ topicsURL }) => {
 
   useEffect(() => {
     setIsLoading(true);
+    setError(null);
     getArticles(sort_by, order_by, topic)
       .then((articles) => {
         setArticlesData(articles);
+      })
+      .catch((err) => {
+        setError(err.response.data.msg || 'An error occurred');
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, [sort_by, order_by, topic]);
-
+  
   const handleQueries = (event) => {
     const { name, value } = event.target;
 
@@ -54,11 +60,15 @@ const Articles = ({ topicsURL }) => {
     return <div>Loading articles...</div>;
   }
 
+  if (error) {
+    return <ErrorComponent error={error} />;
+  }
+
   return (
     <>
       <h2>Articles</h2>
       <div>
-        <select name="topic" value={topic} onChange={handleQueries}>
+        <label>Topics: <select name="topic" value={topic} onChange={handleQueries}>
           <option value="" onChange={handleAllArticles}>
             All
           </option>
@@ -72,6 +82,7 @@ const Articles = ({ topicsURL }) => {
             </option>
           ))}
         </select>
+        </label>
       </div>
       <div>
         <label>

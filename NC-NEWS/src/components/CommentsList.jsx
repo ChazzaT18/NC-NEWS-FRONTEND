@@ -36,6 +36,7 @@ const CommentsList = ({
       <form onSubmit={currentUser === undefined ? showAlert : handleSubmit}>
         <label>Add a comment:</label>
         <input
+          required
           type="text"
           name="comment"
           id="new-comment"
