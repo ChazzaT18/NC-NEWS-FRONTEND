@@ -1,9 +1,15 @@
 import axios from "axios";
 const baseUrl = "https://chazzat18-nc-news.onrender.com";
 
-export const getArticles = () => {
+export const getArticles = (sort_by, order_by, topic) => {
+
+  const params = new URLSearchParams({
+    sort_by: sort_by,
+    order_by: order_by,
+    topic: topic
+  });
   return axios
-    .get(`${baseUrl}/api/articles`)
+    .get(`${baseUrl}/api/articles?${params}`)
     .then((response) => {
       return response.data.articles;
     })
@@ -79,9 +85,14 @@ export const postCommentByArticleId = (newComment, username, article_id) => {
     });
 };
 
-export const getArticlesByTopic = (slug) => {
+export const getArticlesByTopic = (slug, sort_by, order_by) => {
+  const params = new URLSearchParams({
+    slug: slug,
+    sort_by: sort_by,
+    order_by: order_by
+  });
   return axios
-    .get(`${baseUrl}/api/articles?topic=${slug}`)
+    .get(`${baseUrl}/api/articles?${params}`)
     .then((response) => {
       console.log(response.data.articles);
       return response.data.articles;

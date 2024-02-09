@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTopics } from "./api";
 import Articles from "./components/Articles";
-import TopicsArticles from "./components/TopicsArticles";
+// import TopicsArticles from "./components/TopicsArticles";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import SingleArticle from "./components/SingleArticle";
@@ -35,13 +35,6 @@ function App() {
         <Header />
         <NavBar />
         <Routes>
-          {topicsURL.map((topic) => (
-            <Route
-              key={topic.slug}
-              path={`/${topic.slug}`}
-              element={<TopicsArticles topic={topic} topicsURL={topicsURL} />}
-            />
-          ))}
           <Route path="/articles/:article_id" element={<SingleArticle />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/*" element={<Articles topicsURL={topicsURL} />} />
