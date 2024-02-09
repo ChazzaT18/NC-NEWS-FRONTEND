@@ -23,32 +23,37 @@ const NavBar = () => {
   return (
     <>
       <nav>
-          <button className="nav-buttons">
-            <Link to="/" className="nav-link">
-              Articles
-            </Link>
-          </button>
-          <button className="nav-buttons">
-            <Link to="/users" className="nav-link">
-              Users
-            </Link>
-          </button>
-            <button
-              className="nav-buttons"
-              onClick={toggleLoginForm}>
-              {currentUser === undefined ? (
-                "Log In"
-              ) : (
-                <>
-                  <span id='logged-in-as-tag'>Logged in as:</span> {currentUser.username}
-                  <img id='logged-in-users-avatar'src={currentUser.avatar_url} alt="User Avatar" />
-                </>
-              )}
-            </button>
+        <button className="nav-buttons">
+          <Link to="/" className="nav-link">
+            Articles
+          </Link>
+        </button>
+        <button className="nav-buttons">
+          <Link to="/users" className="nav-link">
+            Users
+          </Link>
+        </button>
+        <button className="nav-buttons" onClick={toggleLoginForm}>
+          {currentUser === undefined ? (
+            "Log In"
+          ) : (
+            <>
+              <span id="logged-in-as-tag">Logged in as:</span>{" "}
+              {currentUser.username}
+              <img
+                id="logged-in-users-avatar"
+                src={currentUser.avatar_url}
+                alt="User Avatar"
+              />
+            </>
+          )}
+        </button>
       </nav>
       {showLogin && (
         <div className="floating-menu">
-          <button className="exit-button" onClick={toggleLoginForm}>Exit</button>
+          <button className="exit-button" onClick={toggleLoginForm}>
+            Exit
+          </button>
           <ul className="user-login">
             {usersData.map((user) => (
               <UserLogInCard key={user.username} user={user} />
@@ -61,4 +66,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

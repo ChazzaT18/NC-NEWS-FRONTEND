@@ -13,7 +13,9 @@ const UserLogInCard = ({ user }) => {
           alt={user.username}
         />{" "}
         <br />
-        {loggedInUser === user ? `Logged in` : (
+        {loggedInUser === user ? (
+          `Logged in`
+        ) : (
           <button
             onClick={() => {
               setLoggedInUser(user);
